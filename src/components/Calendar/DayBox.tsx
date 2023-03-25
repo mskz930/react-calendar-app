@@ -2,13 +2,24 @@ import React from 'react'
 
 type Props = {
   date: number,
-  selected: boolean
+  selected: boolean,
+  onClick?: React.MouseEventHandler
 }
 
-const DayBox = ({date, selected}: Props) => {
-  const handleClick = () => {
-    alert(`clicked at day ${date}`)
-  }
+type Event = {
+  id: number,
+  title: string,
+}
+
+const DayBox = ({date, selected, onClick}: Props) => {
+  const [events, setEvents] = React.useState<Event[]>([])
+
+  // const addEvents = () => {
+  //   const event = {id: events.length, title: 'untitled'}
+  //   const newEvents = [...events, event]
+  //   setEvents(newEvents)
+  // }
+
 
   return (
     <div 
@@ -19,13 +30,32 @@ const DayBox = ({date, selected}: Props) => {
               marginTop: '-1px',
               marginLeft: '-1px',
           }}
-      onClick={handleClick}
+      onClick={onClick}
     >
       <p style={{ textAlign: 'right',
                   margin: '0', 
                   padding: '0 10px 0 0'
                 }}
       >{date}</p>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start'
+      }}>
+        {events.slice(0,3).map((event, index) => (
+          <div key={index}
+            style={{
+              fontSize: '16px',
+              padding: '0 10px',
+              width: '100%',
+              boxSizing: 'border-box',
+              backgroundColor: 'rgba(255,255,255,0.1)',
+            }}
+          >
+            {`${event.title} ${event.id}`}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

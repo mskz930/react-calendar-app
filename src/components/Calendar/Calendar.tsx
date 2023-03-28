@@ -113,58 +113,80 @@ const Calender = () => {
   }
 
   return (
-      <div>
-        <div style={{
-          margin: '30px 0',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-          <button style={{margin: '0 20px'}} onClick={prevMonth}>prev</button>
-          {`${date.year}年  ${date.month}月`}
-          <button style={{margin: '0 20px'}} onClick={nextMonth}>next</button>
-        </div>
-        <div
+      <div style={{ }}>
+        <div 
+          className="content-wrapper"
           style={{
             display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            maxWidth: '1200px'
+            flexDirection: 'column',
+            height: '100vh',
+            alignItems: 'center',
           }}
         >
-            {monthlyHeader.map((desc, index) => (
-              <div key={index} style={{ 
-                width: '13%', 
-                minHeight: '30px',
-                marginTop: '-1px',
-                marginLeft: '-1px'
-              }}>
-                {desc}
-              </div>
-            ))}
+          <div 
+            className="header"
+            style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '80px',
+            }}
+          >
+            <button style={{margin: '0 20px'}} onClick={prevMonth}>prev</button>
+            {`${date.year}年  ${date.month}月`}
+            <button style={{margin: '0 20px'}} onClick={nextMonth}>next</button>
           </div>
-        <div 
-            className="container" 
+          <div 
+            className="content"
             style={{
               display: 'flex',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              marginBottom: '50px',
-              maxWidth: '1200px',
+              flexDirection: 'column',
+              flex: '1',
+              marginBottom: '5px'
             }}
-        >
-          {days.map((day, index) => (
-            <DayBox 
-              key={index}
-              date={day} 
-              selected={day === date.day} 
-              textColor={pickColor(index)}
-              onClick={modalOpen}
-            />
-          ))}
+          >
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                maxWidth: '1100px',
+              }}
+            >
+                {monthlyHeader.map((desc, index) => (
+                  <div key={index} style={{ 
+                    width: '14%', 
+                    marginTop: '-1px',
+                    marginLeft: '-1px'
+                  }}>
+                    {desc}
+                  </div>
+                ))}
+            </div>
+            <div 
+                className="container" 
+                style={{
+                  flex: '1', // 縦方向に伸ばす
+                  display: 'flex',
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  maxWidth: '1100px',
+                }}
+            >
+              {days.map((day, index) => (
+                <DayBox 
+                  key={index}
+                  date={day} 
+                  selected={day === date.day} 
+                  textColor={pickColor(index)}
+                  onClick={modalOpen}
+                />
+              ))}
+            </div>
+          </div>
         </div>
         <Modal show={showModal} setShow={setShowModal}>
           <InputEventForm />

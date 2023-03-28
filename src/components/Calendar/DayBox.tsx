@@ -25,20 +25,26 @@ const DayBox = ({date, selected, textColor, onClick}: Props) => {
   return (
     <div 
       style={{
-              width: '13%', 
-              maxHeight: '180px',
-              border: '1px solid',
+              width: '14%', 
+              border: '1px solid #D8D8D8',
               marginTop: '-1px',
               marginLeft: '-1px',
           }}
       onClick={onClick}
     >
-      <p style={{ textAlign: 'right',
-                  margin: '0', 
-                  padding: '0 10px 0 0',
-                  color: textColor
-                }}
-      >{date}</p>
+      <p style={{
+        textAlign: 'right'
+      }}>
+        <span 
+          style={{
+          margin: '0', 
+          width: '100%',
+          paddingRight: '15px',
+          color: textColor
+        }}>{date}</span>
+      </p>
+      
+      
       <div style={{
         display: 'flex',
         flexDirection: 'column',

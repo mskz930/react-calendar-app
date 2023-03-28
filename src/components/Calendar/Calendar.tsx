@@ -23,7 +23,7 @@ const totalDisplayDays = 42 // 表示する日数
 // すべてのイベントデータ
 const eventData: Map<number, Map<number, Event[]>> = new Map<number, Map<number, Event[]>>();
 
-
+const monthlyHeader: string[] = ["日", "月", "火", "水", "木", "金", "土"];
 
 /**
  * 現在時刻の日付を取得
@@ -114,7 +114,6 @@ const Calender = () => {
 
   return (
       <div>
-        <h2>カレンダー</h2>
         <div style={{
           margin: '30px 0',
           display: 'flex',
@@ -126,14 +125,35 @@ const Calender = () => {
           {`${date.year}年  ${date.month}月`}
           <button style={{margin: '0 20px'}} onClick={nextMonth}>next</button>
         </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            maxWidth: '1200px'
+          }}
+        >
+            {monthlyHeader.map((desc, index) => (
+              <div key={index} style={{ 
+                width: '13%', 
+                minHeight: '30px',
+                marginTop: '-1px',
+                marginLeft: '-1px'
+              }}>
+                {desc}
+              </div>
+            ))}
+          </div>
         <div 
             className="container" 
             style={{
-              display: 'flex', 
+              display: 'flex',
+              flexDirection: 'row',
               flexWrap: 'wrap',
               justifyContent: 'center',
               marginBottom: '50px',
-              maxWidth: '1200px'
+              maxWidth: '1200px',
             }}
         >
           {days.map((day, index) => (

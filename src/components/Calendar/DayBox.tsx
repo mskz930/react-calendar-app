@@ -26,7 +26,7 @@ const DayBox = ({date, selected, textColor, onClick}: Props) => {
     <div 
       style={{
               width: '13%', 
-              minHeight: '130px',
+              maxHeight: '180px',
               border: '1px solid',
               marginTop: '-1px',
               marginLeft: '-1px',

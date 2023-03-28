@@ -27,12 +27,18 @@ const Modal = ({ show, setShow, children }: { show: boolean, setShow: Function, 
             style={{
               zIndex: '2',
               width: '50%',
-              padding: '1em',
               background: '#fff'
             }}
           >
+            <div style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              padding: '5px',
+            }}>
+              <button onClick={closeModal}>{"✕"}</button>
+            </div>
             {children}
-            <p><button onClick={closeModal}>{"close"}</button></p>
           </div>
         </div>
       </div>

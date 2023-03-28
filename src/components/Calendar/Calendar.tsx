@@ -20,6 +20,11 @@ type Day = {
 
 const totalDisplayDays = 42 // 表示する日数
 
+// すべてのイベントデータ
+const eventData: Map<number, Map<number, Event[]>> = new Map<number, Map<number, Event[]>>();
+
+
+
 /**
  * 現在時刻の日付を取得
  * @returns MyDate
@@ -53,6 +58,10 @@ const initDays = (now: MyDate): number[] => {
 }
 
 
+/**
+ * カレンダーコンポーネント
+ * @returns 
+ */
 const Calender = () => {
   const [showModal, setShowModal] = React.useState<boolean>(false)
   const [date, setDate]= React.useState<MyDate>(initDate())
@@ -86,15 +95,33 @@ const Calender = () => {
     }
     setDate(newDate)
   }
+
+  // モーダル表示
   const modalOpen = () => {
     setShowModal(true);
   }
 
+  // 土曜は青、日曜は赤を表示するためのカラーピッカー
+  const pickColor = (index: number) :string => {
+    if ((index+1) % 7 === 0) {
+      return "#3399ff"
+    } else if ((index) % 7 === 0) {
+      return "#ff0000"
+    } else {
+      return "inherit"
+    }
+  }
 
   return (
       <div>
         <h2>カレンダー</h2>
-        <div style={{margin: '30px 0'}}>
+        <div style={{
+          margin: '30px 0',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
           <button style={{margin: '0 20px'}} onClick={prevMonth}>prev</button>
           {`${date.year}年  ${date.month}月`}
           <button style={{margin: '0 20px'}} onClick={nextMonth}>next</button>
@@ -111,9 +138,10 @@ const Calender = () => {
         >
           {days.map((day, index) => (
             <DayBox 
+              key={index}
               date={day} 
               selected={day === date.day} 
-              key={index} 
+              textColor={pickColor(index)}
               onClick={modalOpen}
             />
           ))}

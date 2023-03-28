@@ -3,6 +3,7 @@ import React from 'react'
 type Props = {
   date: number,
   selected: boolean,
+  textColor?: string,
   onClick?: React.MouseEventHandler
 }
 
@@ -11,7 +12,7 @@ type Event = {
   title: string,
 }
 
-const DayBox = ({date, selected, onClick}: Props) => {
+const DayBox = ({date, selected, textColor, onClick}: Props) => {
   const [events, setEvents] = React.useState<Event[]>([])
 
   // const addEvents = () => {
@@ -34,7 +35,8 @@ const DayBox = ({date, selected, onClick}: Props) => {
     >
       <p style={{ textAlign: 'right',
                   margin: '0', 
-                  padding: '0 10px 0 0'
+                  padding: '0 10px 0 0',
+                  color: textColor
                 }}
       >{date}</p>
       <div style={{
